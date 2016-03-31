@@ -1,0 +1,75 @@
+<div ng-controller="ManagerController">
+    <div ng-controller="SupervisorController">
+        <div class="row">
+            <div class="col-sm-12">
+                <h3><strong>Sr: {{manager.name}}</strong></h3>
+                {{error}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <form ng-submit="createSupervisor(newSupervisor,manager)" class="form-inline" novalidate>
+                    <div class="form-group">
+                        <label class="sr-only" for="name">Nombre</label>
+                        <input ng-model="newSupervisor.name" type="text" class="form-control" id="name"
+                               placeholder="Nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="email">Email</label>
+                        <input ng-model="newSupervisor.email" type="email" class="form-control" id="email"
+                               placeholder="Email" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="password">Contraseña</label>
+                        <input ng-model="newSupervisor.password" type="password" class="form-control" id="password"
+                               placeholder="Contraseña" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-xs">Agregar supervisor</button>
+                </form>
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="list-group">
+                    <button ng-repeat="super in manager.supervisors" ng-click="selectedSupervisor(super)" type="button"
+                            class="list-group-item">{{super.name}}
+                    </button>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div ng-repeat="emp in selectSupervisor.employees" class="panel panel-primary">
+                    <div class="panel-body text-center">
+                            <strong>Empleado: {{emp.name}}        email: {{emp.email}}</strong>
+                    </div>
+                    <div class="panel-footer" ng-controller="HoursController">
+                        <ul class="list-inline" ng-repeat="hou in emp.hoursList">
+                            <li><strong>Cantidad: </strong>{{hou.quantity}}</li>
+                            <li><strong>Precio hora: </strong> {{hou.unitPrice | currency}}</li>
+                            <li><strong>Precio total: </strong> {{hou.totalPrice}}</li>
+                            <li><strong>Aprobadas: </strong> {{hou.approved}}</li>
+                            <li><strong>Fecha: </strong> {{hou.date}}</li>
+                            <li><strong>Estado: </strong>
+                                <select ng-model="hou.statusPay">
+                                    <option value="Aprobado">Aprobado</option>
+                                    <option value="Pendiente">Pendiente</option>
+
+                                </select>
+                            </li>
+                            <li>
+                            <input ng-model="hou.approved" type="number" class="form-control" style="width: 80px"
+                            placeholder="Horas aprobar">
+                            </li>
+                            <li>
+                            <button class="btn btn-xs btn-danger" ng-click="updateHours(hou)">Aprobar</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--{{manager}}-->
+        <!--{{manager.id}}-->
+    </div>
+</div>

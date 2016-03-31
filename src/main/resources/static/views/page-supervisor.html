@@ -1,0 +1,106 @@
+<div class="container" ng-controller="SupervisorController">
+    <h1>{{SingleSupervisor.name}}</h1>
+    <div ng-controller="EmployeeController">
+        <div class="row">
+            <div class="col-sm-5">
+                <form ng-submit="createEmployee(newEmployee,SingleSupervisor)" class="form-horizontal" name="newEmployeeForm">
+                    <div class="form-group">
+                        <input ng-model="newEmployee.name" placeholder="Name" required class="form-control" type="text">
+                    </div>
+                    <div class="form-group">
+                        <input ng-model="newEmployee.email" placeholder="Email" class="form-control" type="email" required>
+                    </div>
+                    <button type="submit" class="btn btn-success btn-block" ng-disabled="newEmployeeForm.$invalid">Agregar empleado</button>
+                </form>
+            </div>
+            <div class="col-sm-7">
+
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-sm-5">
+                <ul class="list-unstyled">
+                    <li ng-repeat="employee in SingleSupervisor.employees">
+                        <ul class="list-inline well">
+                            <li><strong>Empleado: </strong>{{employee.name}}</li>
+                            <!--<li><strong>Email: </strong>{{employee.id}}</li>-->
+                            <li>
+                                <button ng-click="selectedEmployee(employee)" class="btn btn-primary btn-xs">Detalles</button>
+                            </li>
+                            <li>
+                                <button ng-click="selectedEmployee(employee)" class="btn btn-xs btn-info" data-toggle="modal"
+                                        data-target="#hoursModal">Agregar horas
+                                </button>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-sm-7">
+                <table class="table table-bordered table-responsive" ng-show="selectEmployee">
+                    <tr class="active">
+                        <th>Fecha</th>
+                        <th>Cantidad</th>
+                        <th>Precio hora</th>
+                        <th>Aprobadas</th>
+                        <th>Precio total</th>
+                    </tr>
+                    <tr ng-repeat="hours in selectEmployee.hoursList">
+                        <td>{{hours.date}}</td>
+                        <td>{{hours.quantity}}</td>
+                        <td>{{hours.unitPrice | currency}}</td>
+                        <td>{{hours.approved}}</td>
+                        <td>{{hours.totalPrice | currency}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div ng-controller="HoursController">
+            <div class="modal fade" id="hoursModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel"><strong>{{selectEmployee.name}}</strong></h4>
+                        </div>
+                        <form ng-submit="createHours(newHours,selectEmployee)" class="form-horizontal" name="hoursForm" novalidate>
+                            <div class="modal-body">
+
+                                <div class="form-group">
+                                    <label for="quantity" class="col-sm-4 control-label">Cantidad</label>
+                                    <div class="col-sm-8">
+                                        <input ng-model="newHours.quantity" type="number" placeholder="Cantidad" class="form-control" id="quantity" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="unitPrice" class="col-sm-4 control-label">Precio hora</label>
+                                    <div class="col-sm-8">
+                                        <input ng-model="newHours.unitPrice" type="number" placeholder="Precio hora" class="form-control" id="unitPrice" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="dateHours" class="col-sm-4 control-label">Fecha</label>
+                                    <div class="col-sm-8">
+                                        <input ng-model="newHours.date" id="dateHours" placeholder="Fecha" type="date" class="form-control">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                                <button type="submit" ng-disabled="hoursForm.$invalid" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--{{SingleSupervisor}}-->
+</div>
