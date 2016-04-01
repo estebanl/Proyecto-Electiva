@@ -167,25 +167,6 @@
     </div>
     <div id="cosa"></div>
 </div>
-<button onclick="createdd()">Create</button>
-<script>
-    var doc = new jsPDF();
-    var specialElementHandlers = {
-        'cosa':function (element, renderer) {
-            return true;
-        }
-    };
 
-   function createdd() {
-
-       var html = document.getElementById('tabla').innerHTML;
-
-       doc.fromHTML(html,200,200,{
-           'width':500,'elementHandlers':specialElementHandlers
-       });
-
-       doc.save('Test.pdf');
-   }
-</script>
 </body>
 </html>

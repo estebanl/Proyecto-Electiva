@@ -41,4 +41,13 @@ public class EmployeeController {
         repository.save(employee);
 
     }
+
+    @RequestMapping(value = "/employee",method = RequestMethod.PUT,consumes = "application/json")
+    public ResponseEntity<Employee> closeMonth(@RequestBody Employee employee)
+    {
+        System.out.println("employee = [" + employee + "]");
+        Employee empOld = repository.findOne(employee.getId());
+        empOld.setHoursList(null);
+        return ResponseEntity.ok(repository.save(empOld));
+    }
 }

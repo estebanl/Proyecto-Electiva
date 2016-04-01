@@ -44,7 +44,7 @@
                         <button ng-click="selectedEmployee(emp)" class="btn btn-info btn-xs">{{emp.name}}</button>
                     </li>
                 </ul>
-                <div ng-controller="HoursController">
+                <div ng-controller="HoursController" id="imprimir">
                     <table class="table table-responsive" ng-show="selectEmployee">
                         <caption class="text-center"><strong>{{selectEmployee.name}}  | {{selectEmployee.email}}</strong></caption>
                         <thead>
@@ -56,7 +56,7 @@
                             <th>Precio total</th>
                             <th>Estado</th>
                             <th></th>
-                            <th></th>
+                            <th><button onclick="window.print()" class="btn btn-xs btn-link">Imprimir</button></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -93,57 +93,11 @@
                             <td></td>
                             <td></td>
                             <td></td>
+                            <!--<td> <button class="btn btn-danger" ng-click="closeMonth(selectEmployee)">Cerrar mes</button> </td>-->
                         </tr>
                         </tfoot>
                     </table>
                 </div>
-                <!--<div ng-controller="HoursController">-->
-                <!--<table class="table table-responsive">-->
-                <!--<caption class="text-center"><strong>{{emp.name}}</strong> | {{emp.email}}</caption>-->
-                <!--<thead>-->
-                <!--<tr class="active">-->
-                <!--<th>Fecha</th>-->
-                <!--<th>Cantidad</th>-->
-                <!--<th>Precio hora</th>-->
-                <!--<th>Aprobadas</th>-->
-                <!--<th>Precio total</th>-->
-                <!--<th>Estado</th>-->
-                <!--<th></th>-->
-                <!--<th></th>-->
-                <!--</tr>-->
-                <!--</thead>-->
-                <!--<tbody>-->
-                <!--<tr ng-repeat="hou in emp.hoursList" ng-class="hou.statusPay == 'Aprobado' ? 'danger' : ''">-->
-                <!--<td>{{hou.date}}</td>-->
-                <!--<td>{{hou.quantity}}</td>-->
-                <!--<td>{{hou.unitPrice | currency}}</td>-->
-                <!--<td>{{hou.approved}}</td>-->
-                <!--<td>{{hou.totalPrice | currency}}</td>-->
-                <!--<td>-->
-                <!--<select ng-model="hou.statusPay">-->
-                <!--<option value="Aprobado">Aprobado</option>-->
-                <!--<option value="Pendiente">Pendiente</option>-->
-                <!--</select>-->
-                <!--</td>-->
-                <!--<td>-->
-                <!--<input ng-model="hou.approved" type="number" class="form-control"-->
-                <!--style="width: 80px"-->
-                <!--placeholder="Horas aprobar">-->
-                <!--</td>-->
-                <!--<td>-->
-                <!--<button class="btn btn-xs btn-danger" ng-click="updateHours(hou)">Aprobar</button>-->
-                <!--</td>-->
-                <!--</tr>-->
-                <!--</tbody>-->
-                <!--<tfoot onload="calculateTotalHours(emp)">-->
-                <!--<tr>-->
-                <!--<td><button ng-click="calculateTotalHours(emp)">Total</button></td>-->
-                <!--T <td>{{totalHoursApproved}}</td>-->
-                <!--T <td>{{totalHoursQuantity}}</td>-->
-                <!--</tr>-->
-                <!--</tfoot>-->
-                <!--</table>-->
-                <!--</div>-->
             </div>
         </div>
     </div>
