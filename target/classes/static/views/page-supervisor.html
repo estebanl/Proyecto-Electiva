@@ -39,20 +39,33 @@
             </div>
             <div class="col-sm-7">
                 <table class="table table-bordered table-responsive" ng-show="selectEmployee">
-                    <tr class="active">
-                        <th>Fecha</th>
-                        <th>Cantidad</th>
-                        <th>Precio hora</th>
-                        <th>Aprobadas</th>
-                        <th>Precio total</th>
-                    </tr>
-                    <tr ng-repeat="hours in selectEmployee.hoursList">
+                   <thead>
+                   <tr class="active">
+                       <th>Fecha</th>
+                       <th>Cantidad</th>
+                       <th>Precio hora</th>
+                       <th>Aprobadas</th>
+                       <th>Precio total</th>
+                   </tr>
+                   </thead>
+                    <tbody>
+                    <tr ng-repeat="hours in selectEmployee.hoursList" ng-class="hours.approved > 0 ? 'danger' : ''">
                         <td>{{hours.date}}</td>
                         <td>{{hours.quantity}}</td>
                         <td>{{hours.unitPrice | currency}}</td>
                         <td>{{hours.approved}}</td>
                         <td>{{hours.totalPrice | currency}}</td>
                     </tr>
+                    </tbody>
+                   <tfoot>
+                    <tr class="info">
+                        <td><strong>TOTAL</strong></td>
+                        <td>{{totalHours}}</td>
+                        <td></td>
+                        <td>{{totalApproved}}</td>
+                        <td>{{totalTotalPrice | currency}}</td>
+                    </tr>
+                   </tfoot>
                 </table>
             </div>
         </div>

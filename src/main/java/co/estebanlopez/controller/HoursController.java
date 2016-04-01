@@ -48,7 +48,7 @@ public class HoursController {
         Hours oldHours = repository.findOne(hours.getId());
         oldHours.setApproved(hours.getApproved());
         oldHours.setStatusPay(hours.getStatusPay());
-        oldHours.setTotalPrice(oldHours.getQuantity() * hours.getApproved());
+        oldHours.setTotalPrice(oldHours.getUnitPrice() * hours.getApproved());
         System.out.println("hours = [" + hours + "]");
         repository.save(oldHours);
     }

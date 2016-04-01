@@ -20,6 +20,7 @@ angular.module("app")
             $http.post(supervisorUrl, supervisor)
                 .success(function (data) {
                     $scope.getManager(manager.id);
+                    $scope.newSupervisor={};
                 })
                 .error(function (error) {
                     $scope.error = error;

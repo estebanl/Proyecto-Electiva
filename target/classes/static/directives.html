@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="exampleApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Directives</title>
+    <script src="js/angular/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <script>
+        angular.module("exampleApp",[])
+                .controller("defaultController",function ($scope) {
+
+                    $scope.data = {};
+
+                    $scope.todos = [
+                        { action: "Get groceries", complete: false },
+                        { action: "Call plumber", complete: false },
+                        { action: "Buy running shoes", complete: true },
+                        { action: "Buy flowers", complete: false },
+                        { action: "Call family", complete: false }
+                    ];
+                    $scope.viewFile = function () {
+                        return $scope.showList ? "views-directives/list.html" : "views-directives/table.html";
+                    };
+
+                    $scope.reportChange = function () {
+                        console.log("Displayed content: " + $scope.viewFile());
+                    };
+                });
+    </script>
+    <style>
+        .odd{background-color: lightcoral}
+        .even{background-color: lavenderblush}
+    </style>
+</head>
+<body>
+<h1>Hello</h1>
+<div id="todoPanel" class="panel" ng-controller="defaultController">
+    <!--<h3 class="panel-header">To do List</h3>-->
+    <!--<div>There are {{todos.length}} items</div>-->
+    <!--<div>There are <span ng-bind="todos.length"></span> items</div>-->
+
+    <!--<div ng-bind-template="First: {{todos[0].action}}. Second: {{todos[1].action}}"></div>-->
+
+    <!--<div ng-non-bindable="">-->
+        <!--AngularJS uses {{ and }} characters for templates-->
+    <!--</div>-->
+
+    <!--<div class="well">-->
+        <!--<div>The first item is: {{todos[0].action}}</div>-->
+    <!--</div>-->
+
+    <!--<div class="form-group well">-->
+        <!--<label for="firstItem">Set first item: </label>-->
+        <!--<input name="firstItem" class="form-control" id="firstItem" ng-model="todos[0].action">-->
+    <!--</div>-->
+
+    <!--<table class="table">-->
+        <!--<thead>-->
+        <!--<tr>-->
+            <!--<th>Action</th>-->
+            <!--<th>Done</th>-->
+        <!--</tr>-->
+        <!--</thead>-->
+        <!--<tbody>-->
+        <!--<tr ng-repeat="item in todos">-->
+            <!--<td>{{item.action}}</td>-->
+            <!--<td>{{item.complete}}</td>-->
+        <!--</tr>-->
+        <!--</tbody>-->
+    <!--</table>-->
+
+    <!--<table class="table">-->
+    <!--<thead>-->
+    <!--<tr>-->
+    <!--<th>Action</th>-->
+    <!--<th>Done</th>-->
+    <!--</tr>-->
+    <!--</thead>-->
+    <!--<tbody>-->
+    <!--<tr ng-repeat="item in todos">-->
+    <!--<td ng-repeat="prod in item">{{prod}}</td>-->
+    <!--</tr>-->
+    <!--</tbody>-->
+    <!--</table>-->
+
+    <!--<table class="table">-->
+        <!--<thead>-->
+        <!--<tr>-->
+            <!--<th>#</th>-->
+            <!--<th>Action</th>-->
+            <!--<th>Done</th>-->
+        <!--</tr>-->
+        <!--</thead>-->
+        <!--<tbody>-->
+        <!--<tr ng-repeat="item in todos" ng-class="$odd ? 'odd' : 'even'">-->
+            <!--<td>{{$index + 1}}</td>-->
+            <!--<td ng-repeat="(key,value) in item">{{key}}={{value}}</td>-->
+            <!--<td><span ng-if="$first || $last">{{item.complete}}</span></td>-->
+        <!--</tr>-->
+        <!--</tbody>-->
+    <!--</table>-->
+
+    <!--<table class="table">-->
+        <!--<thead>-->
+        <!--<tr>-->
+            <!--<th>#</th>-->
+            <!--<th>Action</th>-->
+            <!--<th>Done</th>-->
+        <!--</tr>-->
+        <!--</thead>-->
+        <!--<tbody>-->
+        <!--<tr ng-repeat-start="item in todos">-->
+            <!--<td>This is item {{$index}}</td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+            <!--<td>The actionis: {{item.action}}</td>-->
+        <!--</tr>-->
+        <!--<tr ng-repeat-end>-->
+            <!--<td>Item {{$index}} is {{$item.complete? '' : "not "}} complete</td>-->
+        <!--</tr>-->
+        <!--</tbody>-->
+    <!--</table>-->
+
+<!--<div class="well">-->
+    <!--<div class="checkbox">-->
+        <!--<label>-->
+            <!--<input type="checkbox" ng-model="showList">-->
+            <!--Use the list view-->
+        <!--</label>-->
+    <!--</div>-->
+    <!--<ng-include src="viewFile()" onload="reportChange()"></ng-include>-->
+
+<!--</div>-->
+
+    <div class="well">
+        <div class="radio" ng-repeat="button in ['None','Table','List']">
+            <label ng-cloak>
+                <input type="radio" ng-model="data.mode" value="{{button}}" ng-checked="$first">
+                {{button}}
+            </label>
+        </div>
+    </div>
+
+    <div ng-switch on="data.mode" ng-cloak>
+        <div ng-switch-when="Table">
+            <table class="table" id="tabla">
+                <thead>
+                    <tr><th>#</th><th>Action</th><th>Done</th></tr>
+                </thead>
+                <tr ng-repeat="item in todos" ng-class="$odd ? 'odd' : 'even'">
+                    <td>{{$index + 1}}</td>
+                    <td ng-repeat="prop in item">{{prop}}</td>
+                </tr>
+            </table>
+        </div>
+        <div ng-switch-when="List">
+            <ol>
+                <li ng-repeat="item in todos">
+                    {{item.action}}<span ng-if="item.complete"> (Done)</span>
+                </li>
+            </ol>
+        </div>
+        <div ng-switch-default>
+            Select another option to display a layout
+        </div>
+    </div>
+    <div id="cosa"></div>
+</div>
+<button onclick="createdd()">Create</button>
+<script>
+    var doc = new jsPDF();
+    var specialElementHandlers = {
+        'cosa':function (element, renderer) {
+            return true;
+        }
+    };
+
+   function createdd() {
+
+       var html = document.getElementById('tabla').innerHTML;
+
+       doc.fromHTML(html,200,200,{
+           'width':500,'elementHandlers':specialElementHandlers
+       });
+
+       doc.save('Test.pdf');
+   }
+</script>
+</body>
+</html>
