@@ -60,6 +60,7 @@ atlassian-ide-plugin.xml
 com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
+target/*
 target
 /src/main/resources/static/directives.html
 /src/main/resources/static/views-directives/*
