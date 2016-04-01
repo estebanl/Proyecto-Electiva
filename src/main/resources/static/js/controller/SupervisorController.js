@@ -9,6 +9,7 @@ angular.module("app")
                 .success(function (data) {
                     $scope.SingleSupervisor = data;
                     $scope.selectSupervisor = data;
+
                 })
                 .error(function (error) {
                     $scope.error = error;
@@ -40,5 +41,6 @@ angular.module("app")
         
         $scope.selectedSupervisor = function (supervisor) {
             $scope.getSupervisor(supervisor.id);
+
         };
     });

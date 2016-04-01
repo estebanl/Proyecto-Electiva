@@ -5,10 +5,12 @@ angular.module("app")
         $scope.SingleSupervisor = ActualUserFactory.getData();
         
         $scope.getSupervisor = function (id) {
+            $scope.selectEmployee = {};
             $http.get(supervisorUrl + "/" + id)
                 .success(function (data) {
                     $scope.SingleSupervisor = data;
                     $scope.selectSupervisor = data;
+
                 })
                 .error(function (error) {
                     $scope.error = error;
@@ -40,5 +42,6 @@ angular.module("app")
         
         $scope.selectedSupervisor = function (supervisor) {
             $scope.getSupervisor(supervisor.id);
+
         };
     });
